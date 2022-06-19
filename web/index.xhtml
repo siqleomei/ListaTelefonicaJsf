@@ -9,6 +9,8 @@
         <h:form>
             <h:commandButton value="Ir para cadastro" action="#{contatoBean.irParaCadastro()}"></h:commandButton>
             <h:commandButton value="Ir para edicao" action="#{contatoBean.irParaEdicao()}"></h:commandButton>
+            
+            <h:outputText value="Teste" rendered="#{contatoBean.teste == true}"></h:outputText>
         </h:form>
     </h:body>
 </html>

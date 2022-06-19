@@ -70,9 +70,11 @@ public abstract class CrudBean<E, D extends CrudDao> {
         this.entidades = entidades;
     }
     
-   
-    
     public abstract String irParaCadastro();
     public abstract String irParaEdicao();
     public abstract String irParaBusca();
+    
+    public boolean isTeste() {
+        return true;
+    };
 }
