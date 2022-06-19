@@ -53,6 +53,24 @@ public abstract class CrudBean<E, D extends CrudDao> {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public E getEntidade() {
+        return entidade;
+    }
+
+    public List<E> getEntidades() {
+        return entidades;
+    }
+
+    public void setEntidade(E entidade) {
+        this.entidade = entidade;
+    }
+
+    public void setEntidades(List<E> entidades) {
+        this.entidades = entidades;
+    }
+    
+   
     
     public abstract String irParaCadastro();
     public abstract String irParaEdicao();

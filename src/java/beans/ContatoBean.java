@@ -6,19 +6,20 @@ package beans;
 
 import dao.ContatoDao;
 import java.io.Serializable;
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import models.Contato;
 
 /**
  *
  * @author Usuario
  */
-@Named
+@ManagedBean(value = "contatoBean")
 @SessionScoped
 public class ContatoBean extends CrudBean<Contato, ContatoDao> implements Serializable{
-
+    private static final long serialVersionUID = 1L;
     private ContatoDao contatoDao;
+    
     @Override
     public ContatoDao getDao() {
         if (contatoDao == null) {

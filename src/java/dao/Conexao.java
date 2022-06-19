@@ -13,14 +13,14 @@ import java.sql.SQLException;
  * @author Usuario
  */
 public class Conexao {
-    private final String bd = "biblioteca"; // mudar o nome da base para cada projeto
+    private final String bd = "contatos"; // mudar o nome da base para cada projeto
     private final String usuario = "root";
     private final String senha = "";
 
     public Connection conectar() {
         Connection conexao = null;
         try { //tratamento de exceção            
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/" + this.bd,
                     this.usuario, this.senha);
         } catch (ClassNotFoundException e1) {
