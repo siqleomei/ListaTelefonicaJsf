@@ -13,6 +13,7 @@ public class Contato {
     private int id;
     private String nome;
     private String telefone;
+    private String email;
 
     /**
      * @return the id
@@ -56,5 +57,19 @@ public class Contato {
         this.telefone = numero;
     }
 
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
 
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
 }

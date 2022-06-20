@@ -19,10 +19,15 @@ public abstract class CrudBean<E, D extends CrudDao> {
 
     public abstract E criarNovaEntidade();
 
+    public void novo() {
+        entidade = criarNovaEntidade();
+    }
+    
     public void salvar() {
         try {
             getDao().gravar(entidade);
             entidade = criarNovaEntidade();
+            irParaBusca();
         } catch (ErroSistema ex) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +42,7 @@ public abstract class CrudBean<E, D extends CrudDao> {
         }
     }
     
-    public void excluir() {
+    public void excluir(E entidade) {
         try {
             getDao().apagar(entidade);
         } catch (ErroSistema ex) {
@@ -45,13 +50,14 @@ public abstract class CrudBean<E, D extends CrudDao> {
         }
     }
     
-    public void buscar() {
+    public List<E> buscar() {
         try {
             entidades = getDao().buscar("");
             
         } catch (ErroSistema ex) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return entidades;
     }
 
     public E getEntidade() {
@@ -71,7 +77,7 @@ public abstract class CrudBean<E, D extends CrudDao> {
     }
     
     public abstract String irParaCadastro();
-    public abstract String irParaEdicao();
+    public abstract String irParaEdicao(E entidade);
     public abstract String irParaBusca();
     
     public boolean isTeste() {

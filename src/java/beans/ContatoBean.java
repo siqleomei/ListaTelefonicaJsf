@@ -6,6 +6,7 @@ package beans;
 
 import dao.ContatoDao;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import models.Contato;
@@ -35,16 +36,27 @@ public class ContatoBean extends CrudBean<Contato, ContatoDao> implements Serial
 
     @Override
     public String irParaCadastro() {
-        return "cadastro-contato.xhtml?faces-redirect=true";
+        novo();
+        return "cadastro.xhtml?faces-redirect=true";
     }
 
     @Override
-    public String irParaEdicao() {
-        return "editar-contato.xhtml?faces-redirect=true";
+    public String irParaEdicao(Contato contato) {
+        setEntidade(contato);
+        return "/edita.xhtml?faces-redirect=true";
     }
 
     @Override
     public String irParaBusca() {
-        return "lista-contato.xhtml?faces-redirect=true";
+        return "index.xhtml?faces-redirect=true";
     }
+
+    @Override
+    public List<Contato> getEntidades() {
+        if (super.getEntidades() == null)
+            buscar();
+        return super.getEntidades();
+    }
+    
+    
 }

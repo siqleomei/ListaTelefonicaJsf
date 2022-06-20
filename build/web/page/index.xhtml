@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="StyleSheet" type="text/css" href="./page/index.css" media="screen" />
+    </h:head>
+    <h:body styleClass="body">
+
+        <f:view>
+            <h:panelGroup layout="block" styleClass="header">
+                <h1>Lista de contato</h1>
+                <h:form>
+                    <h:commandButton value="Novo contato" action="#{contatoBean.irParaCadastro()}" styleClass="novo_contato"></h:commandButton>
+                </h:form>
+            </h:panelGroup>
+
+            <c:forEach var="contato" items="#{contatoBean.buscar()}">
+
+                <h:panelGroup layout="block" styleClass="card">
+                    <span class='material-icons md-56' id='account'>account_circle</span>
+                    <h:panelGroup layout="block" styleClass="card-content">
+                        <h:panelGroup layout="block" styleClass="information">
+                            <h:outputText value="#{contato.nome}" styleClass="h2"/>
+                            <br/>
+                            <h:outputText value="#{contato.email}" styleClass="h3"/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup styleClass="icons">
+                        <h:commandLink styleClass="icon">
+                            <span class="material-symbols-rounded">mail</span>
+                        </h:commandLink>
+                        <h:commandLink styleClass="icon" action="#{contatoBean.irParaEdicao(contato)}">
+                            <span class="material-symbols-rounded" id="edit" >edit</span>
+                        </h:commandLink>
+                        <h:commandLink action="#{contatoBean.excluir(contato)}" styleClass="icon">
+                            <span class="material-symbols-rounded">delete</span>
+                        </h:commandLink>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+
+            </c:forEach>
+        </f:view>
+    </h:body>
+
+</html>
+

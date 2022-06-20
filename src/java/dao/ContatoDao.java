@@ -25,9 +25,10 @@ public class ContatoDao implements CrudDao<Contato> {
         PreparedStatement ps;
         try {
             conn = new Conexao().conectar();
-            ps = conn.prepareStatement("INSERT INTO contatos (Nome, Telefone) VALUES (?, ?)");
+            ps = conn.prepareStatement("INSERT INTO contatos (Nome, Telefone, Email) VALUES (?, ?, ?)");
             ps.setString(1, contato.getNome());
             ps.setString(2, contato.getTelefone());
+            ps.setString(3, contato.getEmail());
             ps.execute();
             ps.close();
             conn.close();
@@ -42,10 +43,11 @@ public class ContatoDao implements CrudDao<Contato> {
         PreparedStatement ps;
         try {
             conn = new Conexao().conectar();
-            ps = conn.prepareStatement("UPDATE contatos SET nome = ?, telefone = ? WHERE id = ?");
+            ps = conn.prepareStatement("UPDATE contatos SET nome = ?, telefone = ?, email = ? WHERE id = ?");
             ps.setString(1, contato.getNome());
             ps.setString(2, contato.getTelefone());
-            ps.setInt(3, contato.getId());
+            ps.setString(3, contato.getEmail());
+            ps.setInt(4, contato.getId());
             ps.execute();
             ps.close();
             conn.close();
@@ -77,7 +79,7 @@ public class ContatoDao implements CrudDao<Contato> {
         PreparedStatement ps;
         try {
             conn = new Conexao().conectar();
-            ps = conn.prepareCall("SELECT Id, Nome, Telefone FROM contatos");
+            ps = conn.prepareCall("SELECT Id, Nome, Telefone, Email FROM contatos");
             ResultSet rs = ps.executeQuery();
             if (rs.first()) {
                 result = new ArrayList<>();
@@ -86,6 +88,7 @@ public class ContatoDao implements CrudDao<Contato> {
                     contato.setId(rs.getInt("id"));
                     contato.setNome(rs.getString("nome"));
                     contato.setTelefone(rs.getString("telefone"));
+                    contato.setEmail(rs.getString("email"));
                     result.add(contato);
                 } while (rs.next());
             }

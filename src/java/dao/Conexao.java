@@ -13,16 +13,17 @@ import java.sql.SQLException;
  * @author Usuario
  */
 public class Conexao {
-    private final String bd = "contatos"; // mudar o nome da base para cada projeto
+    private final String bd = "lista_telefonica"; // mudar o nome da base para cada projeto
     private final String usuario = "root";
     private final String senha = "";
 
     public Connection conectar() {
         Connection conexao = null;
         try { //tratamento de exceção            
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/" + this.bd,
                     this.usuario, this.senha);
+            
         } catch (ClassNotFoundException e1) {
             System.out.println("Erro com o driver: " + e1.getMessage());
         } catch (SQLException e2) {
